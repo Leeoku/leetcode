@@ -41,11 +41,10 @@ nums = [2,7,11,15]
 target = 9
 class Solution:
     def twoSum(self, nums, target: int) :
-        collection = {}):
-            difference = target - number
+        collection = {}
+        difference = target - number
             if number in collection:
                 return [collection[number],index]
-            else:
-                collection[target-number] = index
+            collection[target-number] = index
 
 Solution().twoSum(nums, target) 

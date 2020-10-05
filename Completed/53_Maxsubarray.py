@@ -2,8 +2,6 @@
 
 # Follow up: If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
 
- 
-
 # Example 1:
 
 # Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
@@ -29,8 +27,6 @@
 
 # Input: nums = [-2147483647]
 # Output: -2147483647
-
- 
 
 # Constraints:
 
