@@ -46,6 +46,14 @@
 # Output: 1994
 # Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 
+# Pseudo
+
+# Create a dict that has all the roman numerals and initialize the total to 0
+# Loop through the characters in input except the last one
+#     If current letter value is less than the next letter, subtract from total
+#     Else, add to total
+#     Return the total + value of last char
+
 class Solution:
     def romanToInt(self, s: str) -> int:
         values = {'I': 1, 'V': 5, 'X': 10, 'L':50, 'C':100, 'D':500, 'M':1000}

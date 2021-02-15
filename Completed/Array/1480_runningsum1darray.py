@@ -28,6 +28,11 @@
 #     1 <= nums.length <= 1000
 #     -10^6 <= nums[i] <= 10^6
 
+#PSEUDO
+#Create a new array with a running tally
+#If length is 1, return that number
+# Do a for loop
+    #For each index, add the previous value to current value
 
 class Solution:
     def runningSum(self, nums: List[int]) -> List[int]:

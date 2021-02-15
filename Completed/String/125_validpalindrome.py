@@ -15,11 +15,10 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
         letters = [char.lower() for char in s if char.isalnum()]
-        t = reversed(s)
-        print(t)
-        return letters == list(reversed(letters))
+        print(letters == letters[::-1])
+        return letters == letters[::-1]
         
 #         letters = [char.lower() for char in s if char.isalnum()]
 #         return letters == list(reversed(letters))
 s = 'A man, a plan, a canal: Panama'
-Solution('A man, a plan, a canal: Panama')
+Solution().isPalindrome(s)

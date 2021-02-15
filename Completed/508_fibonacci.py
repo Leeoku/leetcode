@@ -31,6 +31,12 @@
 
 # 0 ≤ N ≤ 30.
 
+# Pseudo
+# Check for exception where N = 0, return 0
+# Create initial array for first two values of [0,1]
+# Create a for loop from 2 to n+1
+#     For each value, add the prev value and prev prev value
+
 class Solution:
     def fib(self, N: int) -> int:
         #recursive

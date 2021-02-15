@@ -32,6 +32,16 @@
 # Input: s = "{[]}"
 # Output: true
 
+# Pseudo
+# Create a dictionary of the valid brackets
+# Check length of string, if odd, not possible to have valid brackets. If condition passed then it's even
+# If even, do a for loop in each character
+#     If match, add to stack
+#     else if length of stack greater than 0 and the current character is equal to the previous char in dictionary, then remove it
+#     Return False if condition doesn't match
+# check if stack is empty 
+
+
 class Solution:
     def isValid(self, s: str) -> bool:
         brackets = {
@@ -44,16 +54,20 @@ class Solution:
         
         #condition that it's odd, no way there is valid paren.
         if len(s) % 2 != 0:
+            print("FALSE")
             return False
         
         for char in s:
             if char in brackets.keys():
                 stack.append(char)
-            elif len(stack) > 0 and char == brackets.get(stack[-1]):
+            elif len(stack) > 0 and char == brackets[(stack[-1])]:
                 stack.pop()
-            return False
+            else:
+                print("FALSE LOOP")
+                return False
+        print(stack)
         return stack == []
-input = "([}}])"
+input = "()[]{}"
 
 Solution().isValid(input)
         

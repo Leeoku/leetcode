@@ -30,21 +30,24 @@
 
 
 #PSUEDO
-# I: Array of integers
-# O: Return an array of the index, Always one solution, 2->10^5
-# E Negatives, what if array is less than 2 length
+# Create an initial empty dictionary. The dictionary will store {target-number: index}, target-number can also be the seen number complement
+# Loop over the array of numbers
+# Check to see if the number is in the dictionary
+    # If yes, return the dictionary[number] to get the index
+    # If no, add {target-number, index}
 
-# Loop through all the numbers
-# If number not in dictionary, add it to dict as key with value 0 as a counter
-
-nums = [2,7,11,15]
-target = 9
+# nums = [2,7,11,15]
+# target = 9
+nums = [3,2,4]
+target = 6
 class Solution:
     def twoSum(self, nums, target: int) :
-        collection = {}
-        difference = target - number
-            if number in collection:
-                return [collection[number],index]
-            collection[target-number] = index
-
+        seen = {}
+        for index, num in enumerate(nums):
+            print(index,num)
+            if num in seen:
+                print([seen[num], index])
+                print(seen)
+                return [seen[num], index]
+            seen[target-num] = index
 Solution().twoSum(nums, target) 

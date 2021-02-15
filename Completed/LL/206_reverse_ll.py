@@ -33,13 +33,13 @@ class ListNode:
             return head
         
         #Reverse the rest of the list
-        node = self.reverseListRecursive(head.next)
+        curr = self.reverseListRecursive(head.next)
 
         #Take the forward far pointer (next.next) and reverse it, then delete the forward pointer (next)
         head.next.next = head
         head.next = None
 
         #Fix Header Pointer
-        return node
+        return curr
 
 
