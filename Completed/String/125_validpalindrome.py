@@ -12,6 +12,30 @@
 # Input: "race a car"
 # Output: false
 
+# Using Strings
+        # left, right = 0, len(s)-1
+        # while left < right:
+        #     if not s[left].isalnum():
+        #         left +=1
+        #     elif not s[right].isalnum():
+        #         right -=1
+        #     elif s[left].upper() == s[right].upper():
+        #         left +=1
+        #         right -=1
+        #     else:
+        #         return False
+        # return True
+
+# Using lists
+clean_string = [letter for letter in s.upper() if letter.isalnum()]
+left, right = 0, len(clean_string)-1
+while left < right:
+        if clean_string[left] !=  clean_string[right]:
+        return False
+        left +=1
+        right -=1
+return True
+
 class Solution:
     def isPalindrome(self, s: str) -> bool:
         letters = [char.lower() for char in s if char.isalnum()]

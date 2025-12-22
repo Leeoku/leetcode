@@ -37,11 +37,12 @@ class Solution:
             else:
                 seen[j] -= 1
         #check to see if all 0
-        return (not any(seen.values()))
+        return all(value == 0 for value in seen.values())
+        # return (not any(seen.values()))
 
 s = "anagram"
 t= "nagaram"
 Solution().isAnagram( s,t)
 
 #Also use collection.counter
-#  return collections.Counter(s) == collections.Counter(t)
+#  return collections.Counter(s) == collections.Counter(t)``

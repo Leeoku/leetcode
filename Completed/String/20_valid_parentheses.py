@@ -12,7 +12,7 @@
 # Input: s = "()"
 # Output: true
 
-# Example 2:
+# Example 2:    
 
 # Input: s = "()[]{}"
 # Output: true
@@ -58,6 +58,7 @@ class Solution:
             return False
         
         for char in s:
+            print(stack)
             if char in brackets.keys():
                 stack.append(char)
             elif len(stack) > 0 and char == brackets[(stack[-1])]:

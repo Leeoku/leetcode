@@ -28,6 +28,28 @@
 #     -109 <= target <= 109
 #     Only one valid answer exists.
 
+#Naive
+# loop over all the values in the list i = range(list) with a different one j = range(i+1, n)
+# see if list[i]+list[j] == target
+# If target, return i, j
+# if not, go to next number pairing
+# if none match then  return empty cause nothing matches
+
+        #naive
+        # n = len(nums)
+        # for i in range(n):
+        #     for j in range(i+1, n):
+        #         if nums[i] + nums[j] == target:
+        #             return [i, j]
+        # return []
+
+        #ideal
+        # seen = {}
+        # for i, value in enumerate(nums):
+        #     complement = target - value
+        #     if value in seen:
+        #         return [seen[value], i ]
+        #     seen[complement] = i
 
 #PSUEDO
 # Create an initial empty dictionary. The dictionary will store {target-number: index}, target-number can also be the seen number complement
@@ -41,6 +63,14 @@
 nums = [3,2,4]
 target = 6
 class Solution:
+
+        # bruteforce
+        # n = len(nums)
+        # for i in range(n-1):
+        #     for j in range(i+1, n):
+        #         if nums[i] + nums[j] == target:
+        #             return [i, j]
+        # return []
     def twoSum(self, nums, target: int) :
         seen = {}
         for index, num in enumerate(nums):
