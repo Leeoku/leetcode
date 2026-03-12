@@ -65,44 +65,40 @@ values = [()]
 
 #Pass 1
 for transaction in transactions:
-    if transaction["amount"] > min_transaction_amount:
-        score_dict[transaction["merchant_id"]] *= multiply_factor
+    amount = transaction["amount"]
+    if amount > min_transaction_amount:
+        score[transaction["merchant_id"]] *= multiply_factor
+
 
 #Pass 2
-# for transaction in transactions:
-#     customer_id = transaction["customer_id"]
-#     merchant_id = transaction["merchant_id"]
-#     customer_dict[merchant_id][customer_id] += 1
-#     if customer_dict[merchant_id][customer_id] >= 3:
-#         score_dict[merchant_id] += additive_factor
 for transaction in transactions:
     customer_id = transaction["customer_id"]
     merchant_id = transaction["merchant_id"]
-    customer_count[merchant_id][customer_id] +=1
+    customer_count[merchant_id][customer_id] += 1
     if customer_count[merchant_id][customer_id] >= 3:
-        score_dict[merchant_id] += additive_factor
-
-
+        score[merchant_id] += additive_factor
+# print(hours_count)
 #Pass 3
-# for transaction in transactions:
-#     customer_id = transaction["customer_id"]
-#     merchant_id = transaction["merchant_id"]
-#     timestamp_string = transaction["timestamp"][:13]
-#     hour = int(timestamp_string[-2:])
-#     hours_dict[merchant_id][customer_id][timestamp_string]+=1
-#     if hour in range(12,17+1):
-#         score_dict[transaction["merchant_id"]] += hour_penalty
+penalty_hours = list(range(12, 18))
+non_penalty_hours = list(range(9,12)) + list(range(18, 22))
 for transaction in transactions:
     customer_id = transaction["customer_id"]
     merchant_id = transaction["merchant_id"]
     hour_string = transaction["timestamp"][:13]
     hour = int(hour_string[-2:])
-    print(type(hour))
     hours_count[merchant_id][customer_id][hour_string] += 1
-    if hours_count[merchant_id][customer_id][hour_string] >= 3:
-        if hour in range(12, 18):
-            score_dict[merchant_id] +=hour_penalty
-        elif hour in range(9,12) or hour in range(18,22):
-            score_dict[merchant_id] -= hour_penalty
+    count = hours_count[merchant_id][customer_id][hour_string]
+
+
+    if count == 3:  # trigger point: retroactively apply for txns 1 and 2 as well
+        if hour in penalty_hours:
+            score[merchant_id] += hour_penalty * 3  # covers all 3
+        elif hour in non_penalty_hours:
+            score[merchant_id] -= hour_penalty * 3
+    elif count > 3:  # subsequent transactions
+        if hour in penalty_hours:
+            score[merchant_id] += hour_penalty
+        elif hour in non_penalty_hours:
+            score[merchant_id] -= hour_penalty
 print({merchant: score_dict[merchant] for merchant in sorted(score_dict)})
 # return {merchant: score_dict[merchant] for merchant in sorted(score_dict)}
