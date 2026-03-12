@@ -36,7 +36,7 @@ Fields: name, email, phone, metadata[key]
 Response: {"id": "cus_ABC123", "object": "customer", ...}
 '''
 
-import json, os
+import json, os #requests
 
 
 
@@ -56,12 +56,18 @@ def create_customers(filepath:str) -> None:
             "email": customer["email"],
             "phone": customer["phone"]
         }
-        for key, value in customer["metadata"].keys():
+        for key, value in customer["metadata"].items():
             data[f"metadata[{key}]"] = value
-        response = requests.post(url, data=data, auth=(api_key,''))
-        response.raise_for_status()
-        response_data = response.json
-        customer_id = customer["metadata"]["internal_id"]
-        stripe_id = response_data["id"]
-        print(f"{customer_id} -> {stripe_id}")
+        try:
+            headers = {
+                'Authorization': f"Bearer {api_key}"
+            }
+            response = requests.post(url, data=customer, headers = headers)
+            response.raise_for_status()
+            response_data = response.json()
+            customer_id = customer["metadata"]["internal_id"]
+            stripe_id = response_data["id"]
+            print(f"{customer_id} -> {stripe_id}")
+        except requests.exception.RequestException as e:
+            print(e)
 create_customers('customers.json')
