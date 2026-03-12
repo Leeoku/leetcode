@@ -1,0 +1,14 @@
+[
+{
+"name": "Alice Nguyen",
+"email": "alice@example.com",
+"phone": "+15141234567",
+"metadata": {"internal_id": "USR-001", "plan": "premium"}
+},
+{
+"name": "Bob Smith",
+"email": "bob@example.com",
+"phone": "+15149876543",
+"metadata": {"internal_id": "USR-002", "plan": "basic"}
+}
+]
