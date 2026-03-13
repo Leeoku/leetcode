@@ -62,6 +62,8 @@ invoices = [
 sample_payment = "PAY|TXN1042|INV:1234|AMT:250|USD"
 
 def find_by_id(payment: str, invoices: list) -> dict | None:
+    if not payment:
+        return None
     fields = payment.split("|")
     for field in fields:
         if field.startswith("INV:"):
@@ -82,13 +84,13 @@ def find_by_id(payment: str, invoices: list) -> dict | None:
 
 #Part 2
 def find_by_amount(payment: str, invoices: list) -> dict | None:
+    if not payment:
+        return None
     fields = payment.split("|")
     for field in fields:
         if field.startswith("AMT"):
             invoice_amount = int(field.split(":")[1])
-    if invoice_amount is None:
-        return None
-    matching_invoices = []
+
     best = None
     for invoice in invoices:
         if invoice["amount"] == invoice_amount:
