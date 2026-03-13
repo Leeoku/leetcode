@@ -67,7 +67,7 @@ values = [()]
 for transaction in transactions:
     amount = transaction["amount"]
     if amount > min_transaction_amount:
-        score[transaction["merchant_id"]] *= multiply_factor
+        score_dict[transaction["merchant_id"]] *= multiply_factor
 
 
 #Pass 2
@@ -76,7 +76,7 @@ for transaction in transactions:
     merchant_id = transaction["merchant_id"]
     customer_count[merchant_id][customer_id] += 1
     if customer_count[merchant_id][customer_id] >= 3:
-        score[merchant_id] += additive_factor
+        score_dict[merchant_id] += additive_factor
 # print(hours_count)
 #Pass 3
 penalty_hours = list(range(12, 18))
@@ -92,13 +92,13 @@ for transaction in transactions:
 
     if count == 3:  # trigger point: retroactively apply for txns 1 and 2 as well
         if hour in penalty_hours:
-            score[merchant_id] += hour_penalty * 3  # covers all 3
+            score_dict[merchant_id] += hour_penalty * 3  # covers all 3
         elif hour in non_penalty_hours:
-            score[merchant_id] -= hour_penalty * 3
+            score_dict[merchant_id] -= hour_penalty * 3
     elif count > 3:  # subsequent transactions
         if hour in penalty_hours:
-            score[merchant_id] += hour_penalty
+            score_dict[merchant_id] += hour_penalty
         elif hour in non_penalty_hours:
-            score[merchant_id] -= hour_penalty
+            score_dict[merchant_id] -= hour_penalty
 print({merchant: score_dict[merchant] for merchant in sorted(score_dict)})
 # return {merchant: score_dict[merchant] for merchant in sorted(score_dict)}
