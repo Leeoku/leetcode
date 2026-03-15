@@ -62,14 +62,12 @@ def fill_edge_gaps(bin_prefix: str, intervals: list) -> list:
 #part 2
 def fill_all_gaps(bin_prefix: str, intervals: list) -> list:
     filled_intervals = fill_edge_gaps(bin_prefix, intervals)
-    # print(filled_intervals)
-    for i in range(len(filled_intervals)-1):
+    for i in range(len(filled_intervals) - 1):
         current_end = int(filled_intervals[i]["end"])
-        next_start = int(filled_intervals[i+1]["start"])
-        if current_end != next_start -1:
-            current_end = str(next_start-1)
+        next_start  = int(filled_intervals[i + 1]["start"])
+        if current_end != next_start - 1:
+            filled_intervals[i]["end"] = str(next_start - 1)
     return filled_intervals
-# fill_all_gaps(bin_prefix, intervals)
 
 #Part3
 
